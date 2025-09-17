@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Akun</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease-in;
+    }
+    h2 {
+      color: #4da6ff;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease-in;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: left;
+    }
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #111;
+      color: white;
+      font-size: 16px;
+    }
+    .status-select {
+      color: #ff3333;
+      font-weight: bold;
+      font-size: 13px;
+    }
+    .status-box {
+      background-color: #003366;
+      padding: 12px;
+      border-radius: 5px;
+      margin: 15px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 16px;
+      animation: fadeInUp 1s ease-in;
+    }
+    .status-box span {
+      color: #00ff00;
+      font-weight: bold;
+      animation: blinkSlow 2s infinite;
+    }
+    @keyframes blinkSlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    #time {
+      margin-top: 5px;
+      color: #ffcc00;
+      font-size: 14px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #4da6ff;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      animation: fadeInUp 1.2s ease-in;
+    }
+    .btn:hover {
+      background-color: #3399ff;
+    }
+
+    /* Popup box */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup-content {
+      background-color: #330000;
+      border: 2px solid red;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 320px;
+      text-align: center;
+      animation: fadeInUp 0.5s ease-out;
+    }
+    .popup-content p {
+      color: #ff3333;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .close-btn {
+      background: red;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>STATUS AKUN OVO99</h2>
+
+  <label for="status">Status ID*</label>
+  <select id="status" class="status-select">
+    <option>TERKUNCI - CELAIM BONUS BELUM DEPOSIT</option>
+  </select>
+
+  <h2>TUJUAN DEPOSIT</h2>
+
+  <label for="jenis">Jenis Rekening*</label>
+  <select id="jenis">
+    <option>DANA</option>
+  </select>
+
+  <label for="norek">Nomor Rekening*</label>
+  <select id="norek">
+    <option>083194887061</option>
+  </select>
+
+  <label for="namarek">Nama Rekening*</label>
+  <select id="namarek">
+    <option>putri63</option>
+  </select>
+
+  <div class="status-box">
+    <span>STATUS : ONLINE</span>
+    <div id="time"></div>
+  </div>
+
+  <button class="btn" onclick="openPopup()">BUKAK AKUN</button>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <p>"Maaf bos ku, silahkan deposit dahulu agar sistem bisa konfirmasi deposit anda."</p>
+      <button class="close-btn" onclick="closePopup()">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    function openPopup() {
+      document.getElementById("popup").style.display = "flex";
+    }
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // Jam & tanggal
+    function updateTime() {
+      let now = new Date();
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      let dateStr = now.toLocaleDateString('id-ID', options);
+      let timeStr = now.toLocaleTimeString('id-ID');
+      document.getElementById("time").innerHTML = dateStr + " • " + timeStr;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+
+</body>
+</html>
