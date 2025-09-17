@@ -33,8 +33,9 @@
       color: white;
       font-size: 16px;
     }
+    /* warna merah khusus dropdown status */
     .status-select {
-      color: #ff3333;
+      color: #ff3333;   /* merah menyala */
       font-weight: bold;
       font-size: 13px;
     }
@@ -62,6 +63,7 @@
       margin-top: 5px;
       color: #ffcc00;
       font-size: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     .btn {
       display: block;
@@ -73,63 +75,58 @@
       font-size: 18px;
       color: white;
       cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       animation: fadeInUp 1.2s ease-in;
     }
     .btn:hover {
       background-color: #3399ff;
     }
-
-    /* Popup box */
-    .popup {
+    #pesan {
       display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .popup-content {
-      background-color: #330000;
-      border: 2px solid red;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 320px;
-      text-align: center;
-      animation: fadeInUp 0.5s ease-out;
-    }
-    .popup-content p {
-      color: #ff3333;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #660000;
+      color: #ffcc00;
       font-weight: bold;
-      margin-bottom: 20px;
-    }
-    .close-btn {
-      background: red;
-      border: none;
-      padding: 10px 20px;
-      color: white;
       border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      letter-spacing: 0.5px;
     }
-
+    .fadeInUp {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* tambahan untuk teks deposit */
+    .deposit-text {
+      color: #00ff00;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 15px;
+      animation: blinkSlow 2s infinite;
     }
   </style>
 </head>
 <body>
 
-  <h2>STATUS AKUN OVO99</h2>
+  <h2>SETATUS AKUN OVO99</h2>
 
-  <label for="status">Status ID*</label>
+  <label for="status">Setatus id*</label>
   <select id="status" class="status-select">
     <option>TERKUNCI - CELAIM BONUS BELUM DEPOSIT</option>
   </select>
 
   <h2>TUJUAN DEPOSIT</h2>
+
+  <!-- Teks Deposit Rp100.000 -->
+  <p class="deposit-text">Deposit Rp100.000</p>
 
   <label for="jenis">Jenis Rekening*</label>
   <select id="jenis">
@@ -151,25 +148,24 @@
     <div id="time"></div>
   </div>
 
-  <button class="btn" onclick="openPopup()">BUKAK AKUN</button>
+  <button class="btn" onclick="showPesan()">BUKAK AKUN</button>
 
-  <!-- Popup -->
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <p>"Maaf bos ku, silahkan deposit dahulu agar sistem bisa konfirmasi deposit anda."</p>
-      <button class="close-btn" onclick="closePopup()">Tutup</button>
-    </div>
+  <div id="pesan">
+    Maaf bos ku, silahkan deposit dahulu agar sistem langsung konfirmasi
   </div>
 
   <script>
-    function openPopup() {
-      document.getElementById("popup").style.display = "flex";
-    }
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
+    function showPesan() {
+      let pesan = document.getElementById("pesan");
+      pesan.style.display = "none"; 
+      void pesan.offsetWidth; 
+      pesan.style.display = "block"; 
+      pesan.classList.remove("fadeInUp"); 
+      void pesan.offsetWidth; 
+      pesan.classList.add("fadeInUp");
     }
 
-    // Jam & tanggal
+    // fungsi jam & tanggal online
     function updateTime() {
       let now = new Date();
       let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
